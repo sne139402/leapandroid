@@ -56,7 +56,7 @@ function checkIfPhoneShouldBeSilent() {
         textMessageRequested = true;
         device.messaging.sendSms({
           to: currentPhoneNumber,
-          body: 'Sorry! In the middle of a technological breakthrough. I\'ll call you back!'
+          body: 'Sorry! I am not free at the moment. I'll call you back later.'
         },
         function (err) {
           console.log(err || 'sms was sent successfully');
