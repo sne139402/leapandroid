@@ -4,7 +4,7 @@ var originalCallVolume,
   textMessageRequested = false;
 
 device.telephony.on('incomingCall', function (signal) {
-  //device.notifications.createNotification("INCOMING! " + signal.phoneNumber).show();
+  
 
   originalCallVolume = device.audio.ringerVolume,
   originalRingerMode = device.audio.ringerMode;
@@ -25,15 +25,14 @@ device.telephony.on('incomingCall', function (signal) {
 });
 
 device.telephony.on('idle', function () {
-  //device.notifications.createNotification("No longer in a call, I'll stop asking.").show();
-
+ 
   device.scheduler.removeTimer("checkingForInCallInputs");
 
   returnToPhoneDefaults();
 });
 
 function checkIfPhoneShouldBeSilent() {
-  //device.notifications.createNotification('Asking if I should be silent...').show();
+ 
 
   device.ajax({
     url: 'http://androidcontroller.herokuapp.com/shouldibesilent',
@@ -44,9 +43,9 @@ function checkIfPhoneShouldBeSilent() {
   }, function onSuccess(body, textStatus, response) {
     var JSONResponse = JSON.parse(body);
     console.info('successfully received http response!');
-    //device.notifications.createNotification('Got a response from server').show();
+   
     console.info(JSON.stringify(JSONResponse));
-    //device.notifications.createNotification('It said ' + JSONResponse.callSound).show();
+   
 
     if (JSONResponse.callSound === false) {
       device.notifications.createNotification('Busy request sent, sending a text').show();
@@ -85,7 +84,7 @@ function returnToPhoneDefaults() {
   }, function onSuccess(body, textStatus, response) {
     var JSONResponse = JSON.parse(body);
     console.info('Successfully got a response after asking to reset the call state');
-    //device.notifications.createNotification('Successfully got a response after asking to reset the call state').show();
+   
     console.info(JSON.stringify(JSONResponse));
   }, function onError(textStatus, response) {
     var error = {};
